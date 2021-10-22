@@ -1,44 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Sep 30 14:07:04 2021
-
 @author: mechpark
 """
-
-# #%%
-# import os
-# import jwt
-# import uuid
-# import hashlib
-# from urllib.parse import urlencode
-
-# import requests
-
-# access_key = ''
-# secret_key = ''
-# server_url = 'https://api.upbit.com'
-
-# payload = {
-#     'access_key': access_key,
-#     'nonce': str(uuid.uuid4()),
-# }
-
-# jwt_token = jwt.encode(payload, secret_key)
-# authorize_token = 'Bearer {}'.format(jwt_token)
-# headers = {"Authorization": authorize_token}
-
-# res = requests.get(server_url + "/v1/accounts", headers=headers)
-
-# print(res.json())
-
-# res = requests.get(server_url + "/v1/status/wallet", headers=headers)
-
-# print(res.json())
 print('Running..')
-
-
 import time
-time.sleep(30)
+time.sleep(30) # 컴퓨터 재부팅 시 인터넷 연결 대기
 #%%
 import os
 os.chdir('/home/pi/PARKBIT/')
@@ -56,11 +23,11 @@ try :
     f.close()
 except :
     print('Failed')
-    check = input('Wanna Recreate?')
-    if check :
+    check = input('Wanna Recreate?(Y/N)')
+    if check == 'Y' :
         f = open("parkbit.txt", 'w')
         data = []
-        data.append(input("키 : "))
+        data.append(str(simEnDecrypt().key)) # 새로운 암호키 생성
         data.append(input("엑세스 : "))
         data.append(input("시크릿 : "))
         EnDecrypt = simEnDecrypt(key = data[0])
@@ -70,6 +37,8 @@ except :
             else :
                 f.write(EnDecrypt.encrypt(data[i])+'\n')
         f.close()
+     else :
+        assert check !='Y'
 
 #%%
 import pyupbit

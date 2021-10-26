@@ -222,8 +222,8 @@ while True :
         op_mode = False
         time.sleep(10)
         
-    # 09시 목표가 갱신
-    if now.hour == 8 and now.minute == 50 and (20<=now.second <= 30) :
+    # 09시 목표가 갱신 # 09:00 후로 설정, upbit 기준 09시에 목표값이 갱신됨
+    if now.hour == 9 and now.minute == 0 and (20<=now.second <= 30) :
         target = cal_target("KRW-BTC")
         print("목표가 :", target)
         op_mode = True 
